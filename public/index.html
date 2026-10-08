@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2563eb"><meta name="description" content="Thi Chuyên AI - ôn thi chuyên với AI">
+<link rel="manifest" href="/manifest.webmanifest">
+<title>Thi Chuyên AI V16</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--text:#172033;--muted:#667085;--p:#2563eb;--line:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{height:62px;position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 18px;gap:12px}.logo{font-weight:850;font-size:19px}.logo small{font-size:11px;color:var(--p)}.sp{flex:1}
+.layout{display:flex;min-height:calc(100vh - 62px)}aside{width:245px;background:#fff;border-right:1px solid var(--line);padding:15px;flex:none}.nav button{width:100%;border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;margin:2px 0;cursor:pointer}.nav button:hover,.nav button.on{background:#eff6ff;color:#1d4ed8;font-weight:750}
+main{width:100%;max-width:1280px;margin:auto;padding:24px 26px}.page{display:none}.page.on{display:block}
+.hero{padding:27px;border-radius:21px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:#fff;margin-bottom:18px}.hero h1{margin:0 0 7px}.hero p{margin:0 0 16px;opacity:.92}
+.grid{display:grid;gap:15px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 5px 20px #10182808}.stat{font-size:28px;font-weight:850}.muted{color:var(--muted)}
+button,.btn{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}.btn{background:var(--p);color:#fff}.btn.alt{background:#eef2ff;color:#1d4ed8}.btn.gray{background:#f2f4f7;color:#344054}
+input,select,textarea{border:1px solid #d0d5dd;border-radius:10px;padding:11px;font:inherit;background:#fff}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}.controls input{flex:1;min-width:200px}
+.badge{display:inline-block;background:#eff6ff;color:#1d4ed8;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:750}
+.chat{height:500px;overflow:auto;border:1px solid var(--line);background:#f8fafc;border-radius:14px;padding:14px}.msg{max-width:84%;padding:11px 14px;border-radius:14px;margin:9px 0;white-space:pre-wrap}.msg.u{margin-left:auto;background:#2563eb;color:#fff}.msg.a{background:#fff;border:1px solid var(--line)}.composer{display:flex;gap:8px;margin-top:9px}.composer textarea{flex:1;min-height:58px}.qrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.q{margin:14px 0}.opt{display:block;border:1px solid var(--line);padding:9px;border-radius:9px;margin:7px 0;cursor:pointer}.timer{font-size:21px;font-weight:850}
+.alert{padding:11px 13px;border-radius:10px;background:#fff7ed;color:#9a3412}.success{background:#f0fdf4;color:#166534}.hide{display:none}.footer{text-align:center;color:var(--muted);padding:35px}
+.mobile{display:none}
+@media(max-width:900px){aside{display:none}.g4,.g3{grid-template-columns:repeat(2,1fr)}main{padding:16px;padding-bottom:82px}.mobile{display:flex;position:fixed;z-index:30;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line)}.mobile button{flex:1;background:#fff;font-size:11px;padding:8px 2px}.composer{flex-direction:column}}
+@media(max-width:560px){.g4,.g3,.g2{grid-template-columns:1fr}.hero{padding:21px}.controls>*{width:100%}.msg{max-width:95%}}
+</style>
+</head>
+<body>
+<header><div class="logo">🎓 Thi Chuyên AI <small>V16</small></div><div class="sp"></div><span id="me" class="muted">Khách</span><button class="btn alt" onclick="go('account')">Tài khoản</button></header>
+<div class="layout"><aside><div class="nav">
+<button data-p="home">🏠 Trang chủ</button><button data-p="tutor">🧑‍🏫 AI Gia sư</button><button data-p="tests">🤖 Tạo đề AI</button><button data-p="exam">⏱️ Làm đề</button><button data-p="plan">📅 Kế hoạch</button><button data-p="progress">📊 Tiến độ</button><button data-p="account">👤 Tài khoản</button>
+</div></aside><main>
+<section id="home" class="page on"><div class="hero"><h1>Ôn thi chuyên thông minh hơn</h1><p>AI gia sư • Tạo đề mới • Làm đề có thời gian • Lưu tiến độ</p><button class="btn" onclick="go('tutor')">Bắt đầu học →</button></div><div id="stats" class="grid g4"></div><h2>🎯 Chọn môn</h2><div id="subjects" class="grid g4"></div></section>
+
+<section id="tutor" class="page"><div class="hero"><h1>🧑‍🏫 AI Gia sư</h1><p>Đặt câu hỏi, chọn chế độ học và gửi ảnh bài tập từ điện thoại.</p></div>
+<div class="controls"><select id="ts"></select><select id="tm"><option>Giải thích dễ hiểu</option><option>Hướng dẫn từng bước</option><option>Gợi ý, chưa cho đáp án</option><option>Kiểm tra lời giải</option></select></div>
+<div id="chat" class="chat"></div><div class="qrow"><button class="btn gray" onclick="quick('Giải thích phần này thật dễ hiểu.')">Giải thích dễ</button><button class="btn gray" onclick="quick('Hướng dẫn mình từng bước.')">Từng bước</button><button class="btn gray" onclick="quick('Cho mình gợi ý trước, chưa cần đáp án.')">Gợi ý</button></div>
+<div class="composer"><textarea id="msg" placeholder="Nhập câu hỏi..."></textarea><input id="pic" type="file" accept="image/*" capture="environment"><button class="btn" onclick="ask()">Gửi</button></div></section>
+
+<section id="tests" class="page"><div class="hero"><h1>🤖 AI tạo đề mới</h1><p>Đề được tạo mới theo yêu cầu; câu trả lời không hiển thị trước khi nộp.</p></div>
+<div class="card"><div class="controls"><select id="xs"></select><select id="xl"><option>Khá</option><option>Giỏi</option><option>Chuyên</option></select><select id="xc"><option>5</option><option>10</option><option>15</option><option>20</option></select><input id="xm" type="number" value="30" min="5" max="180" placeholder="Phút"><button class="btn" onclick="newTest()">Tạo đề</button></div><div id="testOut"></div></div></section>
+
+<section id="exam" class="page"><div class="hero"><h1>⏱️ Làm đề</h1><p id="examInfo">Tạo một đề ở mục “Tạo đề AI”, sau đó làm bài tại đây.</p></div><div id="examBox" class="card"><button class="btn" onclick="go('tests')">Tạo đề mới →</button></div></section>
+
+<section id="plan" class="page"><div class="hero"><h1>📅 Kế hoạch cá nhân</h1><p>Kế hoạch được lưu theo tài khoản trên server.</p></div><div class="card"><input id="goal" style="width:100%" placeholder="Mục tiêu hôm nay"><br><br><textarea id="planText" style="width:100%;min-height:170px" placeholder="Ví dụ: 30 phút Toán, 30 phút Lý..."></textarea><br><br><button class="btn" onclick="savePlan()">Lưu</button></div></section>
+
+<section id="progress" class="page"><div class="hero"><h1>📊 Tiến độ</h1><p>Thống kê được lưu theo tài khoản.</p></div><div id="prog" class="grid g3"></div></section>
+
+<section id="account" class="page"><div class="hero"><h1>👤 Tài khoản</h1><p>Đăng nhập để đồng bộ dữ liệu giữa các thiết bị.</p></div><div class="card"><input id="email" type="email" placeholder="Email" style="width:100%"><br><br><input id="pw" type="password" placeholder="Mật khẩu (tối thiểu 6 ký tự)" style="width:100%"><br><br><div class="qrow"><button class="btn" onclick="register()">Đăng ký</button><button class="btn alt" onclick="login()">Đăng nhập</button><button class="btn gray" onclick="logout()">Đăng xuất</button></div><div id="accountMsg" class="muted"></div></div></section>
+<div class="footer">Thi Chuyên AI V16 • Website online • PWA • Responsive điện thoại</div>
+</main></div>
+<nav class="mobile"><button onclick="go('home')">🏠<br>Trang</button><button onclick="go('tutor')">🧑‍🏫<br>Gia sư</button><button onclick="go('tests')">🤖<br>Tạo đề</button><button onclick="go('progress')">📊<br>Tiến độ</button><button onclick="go('account')">👤<br>Tài khoản</button></nav>
+<script>
+const S=['Lý','Toán','Hóa','Sinh','Tin','Anh','Pháp','Trung','Nhật','Địa','Sử','Văn']; let currentTest=null;
+const $=x=>document.getElementById(x); S.forEach(s=>{['ts','xs'].forEach(id=>$(id).insertAdjacentHTML('beforeend',`<option>${s}</option>`))});
+$('subjects').innerHTML=S.map(s=>`<div class="card"><div class="stat">${s}</div><p class="muted">Ôn thi chuyên</p><button class="btn alt" onclick="setSub('${s}')">Học môn này →</button></div>`).join('');
+$('stats').innerHTML=`<div class="card"><div class="stat">12</div><div class="muted">Môn chuyên</div></div><div class="card"><div class="stat">AI</div><div class="muted">Gia sư</div></div><div class="card"><div class="stat">∞</div><div class="muted">Đề mới</div></div><div class="card"><div class="stat">📱</div><div class="muted">Dùng trên điện thoại</div></div>`;
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>go(b.dataset.p));
+function go(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));$(id).classList.add('on');document.querySelectorAll('[data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p===id));if(id==='progress')loadProgress();if(id==='plan')loadPlan();if(id==='exam'&&currentTest)renderExam();scrollTo(0,0)}
+function setSub(s){$('ts').value=s; $('xs').value=s;go('tutor')}
+function add(text,c){let d=document.createElement('div');d.className='msg '+c;d.textContent=text;$('chat').appendChild(d);$('chat').scrollTop=$('chat').scrollHeight}
+add('Xin chào! Mình là AI Gia sư. Hãy gửi câu hỏi hoặc ảnh bài tập.','a');
+function quick(x){$('msg').value=x;ask()}
+async function ask(){let m=$('msg').value.trim();if(!m)return;add(m,'u');$('msg').value='';let f=new FormData();f.append('message',m);f.append('subject',$('ts').value);f.append('mode',$('tm').value);if($('pic').files[0])f.append('image',$('pic').files[0]);try{let r=await fetch('/api/tutor',{method:'POST',body:f});let d=await r.json();if(!r.ok)throw Error(d.error);add(d.answer,'a')}catch(e){add('Không thể kết nối AI lúc này. Hãy đăng nhập và kiểm tra cấu hình máy chủ.','a')}}
+async function newTest(){ $('testOut').innerHTML='<p class="muted">AI đang tạo đề...</p>';let body={subject:$('xs').value,level:$('xl').value,count:+$('xc').value,minutes:+$('xm').value};try{let r=await fetch('/api/generate-test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});let d=await r.json();if(!r.ok)throw Error(d.error);currentTest=d.test;renderTest(d.test)}catch(e){$('testOut').innerHTML='<div class="alert">Chưa tạo được đề. Hãy đăng nhập và kiểm tra API AI.</div>'}}
+function renderTest(t){$('testOut').innerHTML=`<h2>${esc(t.title||'Đề thi mới')}</h2><p>${esc(t.instructions||'')}</p><p class="timer">⏱️ ${t.minutes||$('xm').value} phút</p>`+(t.questions||[]).map((q,i)=>`<div class="q"><b>Câu ${i+1}. ${esc(q.question)}</b>${(q.options||[]).map((o,j)=>`<label class="opt"><input type="radio" name="t${i}" value="${j}"> ${esc(o)}</label>`).join('')}</div>`).join('')+`<button class="btn" onclick="submitTest()">Nộp bài</button>`}
+function submitTest(){let qs=currentTest.questions||[],score=0;qs.forEach((q,i)=>{let a=document.querySelector(`input[name=t${i}]:checked`);if(a&&+a.value===+q.answer)score++});$('testOut').insertAdjacentHTML('beforeend',`<div class="card success" style="margin-top:15px"><h2>Kết quả ${score}/${qs.length}</h2><p>Đáp án được kiểm tra sau khi nộp.</p></div>`);fetch('/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({correct:score,total:qs.length})})}
+function renderExam(){renderTest(currentTest);$('examInfo').textContent='Bạn đang làm đề đã tạo. Nộp bài để xem điểm.';$('examBox').innerHTML=$('testOut').innerHTML;$('testOut').innerHTML='';}
+function esc(x){return String(x??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+async function loadProgress(){try{let r=await fetch('/api/progress');let d=await r.json();$('prog').innerHTML=`<div class="card"><div class="stat">${d.tests}</div><div class="muted">Bài đã làm</div></div><div class="card"><div class="stat">${d.correct}</div><div class="muted">Câu đúng</div></div><div class="card"><div class="stat">${d.total}</div><div class="muted">Tổng câu</div></div>`}catch{}}
+async function savePlan(){let r=await fetch('/api/plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({goal:$('goal').value,text:$('planText').value})});alert(r.ok?'Đã lưu kế hoạch.':'Bạn cần đăng nhập.')}
+async function loadPlan(){try{let r=await fetch('/api/plan');let d=await r.json();$('goal').value=d.goal||'';$('planText').value=d.text||''}catch{}}
+async function register(){let r=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:$('email').value,password:$('pw').value})});let d=await r.json();$('accountMsg').textContent=d.message||d.error;updateMe()}
+async function login(){let r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:$('email').value,password:$('pw').value})});let d=await r.json();$('accountMsg').textContent=d.message||d.error;updateMe()}
+async function logout(){await fetch('/api/logout',{method:'POST'});updateMe()}
+async function updateMe(){let r=await fetch('/api/me');let d=await r.json();$('me').textContent=d.user?'👤 '+d.user.email:'Khách'} updateMe();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});
+</script>
+</body></html>
